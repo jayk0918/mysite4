@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,14 +63,16 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/user/modifyForm", method = {RequestMethod.GET, RequestMethod.POST})
-	public String modifyForm(HttpSession session, HttpSession request) {
+	public String modifyForm(HttpSession session, Model model) {
 		System.out.println("UserController > modifyForm");
 		
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		int no = authUser.getNo();
 		
 		UserVo userVo = userService.getUser(no);
-		request.setAttribute("userVo", userVo);
+		//request.setAttribute("userVo", userVo); -> session 이용 최소화
+		model.addAttribute("userVo", userVo);
+		System.out.println(userVo);
 		
 		return "user/modifyForm";
 	}
@@ -78,7 +81,13 @@ public class UserController {
 	public String modify(@ModelAttribute UserVo userVo, HttpSession session) {
 		System.out.println("UserController > modify");
 		userService.userUpdate(userVo);
+		/*
 		session.setAttribute("authUser", userVo);
+		-> userVo에 no, name, password gender 다 들어감
+		*/
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		authUser.setName(userVo.getName());
+		System.out.println(authUser);
 		return "redirect:/main";
 	}
 }
