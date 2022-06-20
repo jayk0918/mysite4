@@ -26,9 +26,9 @@
 		<![CDATA[
 			select  no
 					,id
-        			,password
-       				,name
-        			,gender
+					,password
+					,name
+					,gender
 			from users
 			where no = #{no}
 		]]>
@@ -38,8 +38,8 @@
 		<![CDATA[
 			update users
 			set password = #{password}
-		    	,name = #{name}
-		    	,gender = #{gender}
+				,name = #{name}
+				,gender = #{gender}
 			where no = #{no}
 		]]>
 	</update>

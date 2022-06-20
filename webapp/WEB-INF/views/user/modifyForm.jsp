@@ -52,7 +52,7 @@
 
 				<div id="user">
 					<div id="modifyForm">
-						<form action="./modify" method="get">
+						<form action="/mysite4/user/modify" method="post">
 							<input type="hidden" name="no" value="${userVo.no}"></input>
 							<!-- 아이디 -->
 							<div class="form-group">
