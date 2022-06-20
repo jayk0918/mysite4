@@ -23,16 +23,16 @@ public class UserDao {
 	}
 	
 	public UserVo getUser(UserVo userVo) {
-		System.out.println("UserDao.getUser()");
+		System.out.println("UserDao.getUserByIdPw()");
 		
-		UserVo authVo = sqlSession.selectOne("user.getUser", userVo);
+		UserVo authVo = sqlSession.selectOne("user.getUserByIdPw", userVo);
 		return authVo;
 	}
 	
 	public UserVo getUser(int no) {
-		System.out.println("UserDao.getUserNo()");
+		System.out.println("UserDao.getUserByNo()");
 		
-		UserVo authVo = sqlSession.selectOne("user.getUserNo", no);
+		UserVo authVo = sqlSession.selectOne("user.getUserByNo", no);
 		return authVo;
 	}
 	

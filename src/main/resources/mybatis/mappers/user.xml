@@ -12,7 +12,7 @@
 	
 	</insert>
 	
-	<select id = "getUser" parameterType = "com.javaex.vo.UserVo" resultType = "com.javaex.vo.UserVo">
+	<select id = "getUserByIdPw" parameterType = "com.javaex.vo.UserVo" resultType = "com.javaex.vo.UserVo">
 		<![CDATA[
 			select  no
         			,name
@@ -22,7 +22,7 @@
 		]]>
 	</select>
 	
-	<select id = "getUserNo" parameterType = "com.javaex.vo.UserVo" resultType = "com.javaex.vo.UserVo">
+	<select id = "getUserByNo" parameterType = "com.javaex.vo.UserVo" resultType = "com.javaex.vo.UserVo">
 		<![CDATA[
 			select  no
 					,id
