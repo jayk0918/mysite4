@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -7,10 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite4/assets/css/mysite.css" rel="stylesheet"
-	type="text/css">
-<link href="/mysite4/assets/css/user.css" rel="stylesheet"
-	type="text/css">
+<link href="/mysite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="/mysite4/assets/css/user.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -62,16 +59,14 @@
 
 							<!-- 비밀번호 -->
 							<div class="form-group">
-								<label class="form-text" for="input-pass">패스워드</label> <input
-									type="password" id="input-pass" name="password"
-									value="${userVo.password}" placeholder="비밀번호를 입력하세요">
+								<label class="form-text" for="input-pass">패스워드</label>
+								<input type="password" id="input-pass" name="password" value="${userVo.password}" placeholder="비밀번호를 입력하세요">
 							</div>
 
 							<!-- 이메일 -->
 							<div class="form-group">
-								<label class="form-text" for="input-name">이름</label> <input
-									type="text" id="input-name" name="name" value="${userVo.name}"
-									placeholder="이름을 입력하세요">
+								<label class="form-text" for="input-name">이름</label>
+								<input type="text" id="input-name" name="name" value="${userVo.name}" placeholder="이름을 입력하세요">
 							</div>
 
 							<!-- //나이 -->

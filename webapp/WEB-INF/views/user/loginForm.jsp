@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -7,10 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite4/assets/css/mysite.css" rel="stylesheet"
-	type="text/css">
-<link href="/mysite4/assets/css/user.css" rel="stylesheet"
-	type="text/css">
+<link href="/mysite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="/mysite4/assets/css/user.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -62,12 +59,12 @@
 							<!-- 비밀번호 -->
 							<div class="form-group">
 								<label class="form-text" for="input-pass">비밀번호</label>
-								<input type="password" id="input-pass" name="password" value=""	placeholder="비밀번호를 입력하세요">
+								<input type="password" id="input-pass" name="password" value="" placeholder="비밀번호를 입력하세요">
 							</div>
-							<c:if test = "${param.result == 'fail'}">
+							<c:if test="${param.result == 'fail'}">
 								<p>로그인에 실패했습니다. 다시 입력하세요</p>
 							</c:if>
-							
+
 
 							<!-- 버튼영역 -->
 							<div class="button-area">
