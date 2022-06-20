@@ -22,13 +22,28 @@ public class UserDao {
 		return count;
 	}
 	
-	
 	public UserVo getUser(UserVo userVo) {
 		System.out.println("UserDao.getUser()");
 		
 		UserVo authVo = sqlSession.selectOne("user.getUser", userVo);
 		return authVo;
 	}
+	
+	public UserVo getUser(int no) {
+		System.out.println("UserDao.getUserNo()");
+		
+		UserVo authVo = sqlSession.selectOne("user.getUserNo", no);
+		return authVo;
+	}
+	
+	public int userUpdate(UserVo userVo) {
+		int count = -1;
+		count = sqlSession.update("user.userUpdate", userVo);
+		
+		System.out.println(count + "건 수정되었습니다.");
+		return count;
+	}
+	
 	
 	
 	

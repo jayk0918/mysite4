@@ -24,5 +24,19 @@ public class UserService {
 		return authUser;
 	}
 	
+	public UserVo getUser(int no) {
+		System.out.println("UserService.getUser()");
+		
+		UserVo authUser = userDao.getUser(no);
+		return authUser;
+	}
+	
+	public int userUpdate(UserVo userVo) {
+		int count = userDao.userUpdate(userVo);
+		return count;
+	}
+	
+	
+	
 	
 }

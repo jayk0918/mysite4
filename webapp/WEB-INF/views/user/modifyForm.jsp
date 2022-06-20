@@ -52,13 +52,12 @@
 
 				<div id="user">
 					<div id="modifyForm">
-						<form action="user" method="post">
-							<input type="hidden" name="action" value="modify"></input> <input
-								type="hidden" name="no" value="${userVo.no}"></input>
+						<form action="./modify" method="get">
+							<input type="hidden" name="no" value="${userVo.no}"></input>
 							<!-- 아이디 -->
 							<div class="form-group">
-								<label class="form-text" for="input-uid">아이디</label> <span
-									class="text-large bold">${userVo.id}</span>
+								<label class="form-text" for="input-uid">아이디</label>
+								<span class="text-large bold">${userVo.id}</span>
 							</div>
 
 							<!-- 비밀번호 -->
@@ -82,12 +81,10 @@
 								<c:choose>
 									<c:when test="${userVo.gender.equals('male')}">
 										<label for="rdo-male">남</label>
-										<input type="radio" id="rdo-male" name="gender" value="male"
-											checked="checked">
+										<input type="radio" id="rdo-male" name="gender" value="male" checked="checked">
 
 										<label for="rdo-female">여</label>
-										<input type="radio" id="rdo-female" name="gender"
-											value="female">
+										<input type="radio" id="rdo-female" name="gender" value="female">
 									</c:when>
 
 									<c:otherwise>
@@ -95,8 +92,7 @@
 										<input type="radio" id="rdo-male" name="gender" value="male">
 
 										<label for="rdo-female">여</label>
-										<input type="radio" id="rdo-female" name="gender"
-											value="female" checked="checked">
+										<input type="radio" id="rdo-female" name="gender" value="female" checked="checked">
 									</c:otherwise>
 								</c:choose>
 

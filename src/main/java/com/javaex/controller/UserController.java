@@ -62,11 +62,23 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/user/modifyForm", method = {RequestMethod.GET, RequestMethod.POST})
-	public String modifyForm() {
+	public String modifyForm(HttpSession session, HttpSession request) {
 		System.out.println("UserController > modifyForm");
+		
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		int no = authUser.getNo();
+		
+		UserVo userVo = userService.getUser(no);
+		request.setAttribute("userVo", userVo);
+		
 		return "user/modifyForm";
 	}
 	
-	
-	
+	@RequestMapping(value = "/user/modify", method = {RequestMethod.GET, RequestMethod.POST})
+	public String modify(@ModelAttribute UserVo userVo, HttpSession session) {
+		System.out.println("UserController > modify");
+		userService.userUpdate(userVo);
+		session.setAttribute("authUser", userVo);
+		return "redirect:/main";
+	}
 }
