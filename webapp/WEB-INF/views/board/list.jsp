@@ -75,7 +75,11 @@
 										<td>${BoardVo.name}</td>
 										<td>${BoardVo.hit}</td>
 										<td>${BoardVo.date}</td>
-										<td><a href="">[삭제]</a></td>
+										<c:choose>
+											<c:when test="${BoardVo.userNo == authUser.no}">
+												<td><a href="${pageContext.request.contextPath}/delete/no=${BoardVo.no}">[삭제]</a></td>
+											</c:when>
+										</c:choose>
 									</tr>
 								</c:forEach>		
 								

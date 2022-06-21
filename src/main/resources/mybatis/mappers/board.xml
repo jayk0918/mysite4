@@ -9,7 +9,7 @@
 		<result column="br.title" property="title" />
 		<result column="br.content" property="content" />
 		<result column="br.hit" property="hit" />
-		<result column="br.reg_date" property="date" />
+		<result column="reg_date" property="date" />
 		<result column="us.name" property="name" />
 	</resultMap>
 
@@ -19,7 +19,7 @@
 					,br.title
 					,us.name
 					,br.hit
-					,br.reg_date
+					,to_char(br.reg_date, 'yyyy-mm-dd') as reg_date
 			from board br, users us
 			where br.user_no = us.no
 			order by br.no desc
