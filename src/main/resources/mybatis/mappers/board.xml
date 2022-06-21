@@ -4,5 +4,27 @@
 
 <mapper namespace="board">
 
+	<resultMap id="resultMapBoardVo" type="com.javaex.vo.BoardVo">
+		<result column="br.no" property="no" />
+		<result column="br.title" property="title" />
+		<result column="br.content" property="content" />
+		<result column="br.hit" property="hit" />
+		<result column="br.reg_date" property="date" />
+		<result column="us.name" property="name" />
+	</resultMap>
 
+	<select id="getList" resultMap = "resultMapBoardVo">
+		<![CDATA[
+			select  br.no
+					,br.title
+					,us.name
+					,br.hit
+					,br.reg_date
+			from board br, users us
+			where br.user_no = us.no
+			order by br.no desc
+		]]>
+
+	</select>
+	
 </mapper>
