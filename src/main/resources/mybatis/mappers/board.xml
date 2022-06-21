@@ -11,6 +11,7 @@
 		<result column="br.hit" property="hit" />
 		<result column="reg_date" property="date" />
 		<result column="us.name" property="name" />
+		<result column="user_no" property="userNo" />
 	</resultMap>
 
 	<select id="getList" resultMap = "resultMapBoardVo">
@@ -20,6 +21,7 @@
 					,us.name
 					,br.hit
 					,to_char(br.reg_date, 'yyyy-mm-dd') as reg_date
+					,br.user_no as user_no
 			from board br, users us
 			where br.user_no = us.no
 			order by br.no desc
