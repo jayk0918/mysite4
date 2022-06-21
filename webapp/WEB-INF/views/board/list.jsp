@@ -105,8 +105,11 @@
 							
 							<div class="clear"></div>
 						</div>
-						<a id="btn_write" href="">글쓰기</a>
-					
+						<c:choose>
+							<c:when test = "${authUser.no != null}">
+								<a id="btn_write" href="${pageContext.request.contextPath}/board/writeForm?no=${authUser.no}">글쓰기</a>
+							</c:when>
+						</c:choose>
 					</div>
 					<!-- //list -->
 				</div>

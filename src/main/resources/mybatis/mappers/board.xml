@@ -52,5 +52,12 @@
 		]]>
 	</update>
 	
+	<insert id = "insertContent" parameterType = "com.javaex.vo.BoardVo">
+		<![CDATA[
+			insert into board
+			values(seq_board_no.nextval, #{title}, #{content}, 1, sysdate, #{no})
+		]]>
+	</insert>
+	
 	
 </mapper>

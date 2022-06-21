@@ -32,4 +32,14 @@ public class BoardDao {
 		return count;
 	}
 	
+	public int insertContent(BoardVo boardVo) {
+		int count = -1;
+		count = sqlSession.insert("board.insertContent", boardVo);
+		return count;
+	}
+	
+	
+	
+	
+	
 }

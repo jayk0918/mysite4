@@ -52,11 +52,21 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	
 	@RequestMapping(value = "writeForm", method = {RequestMethod.GET, RequestMethod.POST})
 	public String writeForm() {
 		return "/board/writeForm";
 	}
+	
+	@RequestMapping(value = "write", method = {RequestMethod.GET, RequestMethod.POST})
+	public String write(@ModelAttribute BoardVo boardVo, @RequestParam int no, @RequestParam String title, @RequestParam String content) {
+		boardVo.setNo(no);
+		boardVo.setTitle(title);
+		boardVo.setContent(content);
+		boardService.insertContent(boardVo);
+		
+		return "redirect:/board/list";
+	}
+	
 	
 	
 }
