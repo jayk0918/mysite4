@@ -26,7 +26,27 @@
 			where br.user_no = us.no
 			order by br.no desc
 		]]>
-
 	</select>
+	
+	<select id = "getContent" resultMap = "resultMapBoardVo" resultType = "com.javaex.vo.BoardVo">
+		<![CDATA[
+			select  br.no
+					,br.title
+					,us.name
+					,br.hit
+					,to_char(br.reg_date, 'yyyy-mm-dd') as reg_date
+					,br.user_no as user_no
+					,br.content
+			from board br, users us
+			where br.user_no = us.no
+			and br.no = #{no}
+		]]>
+	</select>
+	
+	
+	
+	
+	
+	
 	
 </mapper>

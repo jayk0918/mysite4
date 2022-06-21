@@ -18,4 +18,10 @@ public class BoardService {
 		return boardDao.getList();
 	}
 	
-}
+	public BoardVo getContent(int no) {
+		return boardDao.getContent(no);
+	}
+	
+	
+	
+}	

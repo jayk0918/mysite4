@@ -20,5 +20,11 @@ public class BoardDao {
 		return bList;
 	}
 	
+	public BoardVo getContent(int no) {
+		BoardVo boardVo = sqlSession.selectOne("board.getContent", no);
+		System.out.println("dao : " + boardVo);
+		return boardVo;
+	}
+	
 	
 }
