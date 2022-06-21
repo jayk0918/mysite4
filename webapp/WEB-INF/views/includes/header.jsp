@@ -5,7 +5,7 @@
 
 <div id="header" class="clearfix">
 	<h1>
-		<a href="/mysite4/main">MySite</a>
+		<a href="${pageContext.request.contextPath}/main">MySite</a>
 	</h1>
 
 	<c:choose>
