@@ -13,31 +13,32 @@ import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
 
 @Controller
+@RequestMapping(value="/user")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "/user/joinForm", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "joinForm", method = {RequestMethod.GET, RequestMethod.POST})
 	public String joinForm() {
 		System.out.println("UserController > joinForm");
 		return "user/joinForm";
 	}
 	
-	@RequestMapping(value = "/user/join", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "join", method = {RequestMethod.GET, RequestMethod.POST})
 	public String join(@ModelAttribute UserVo userVo) {
 		System.out.println("UserController > join");
 		userService.join(userVo);
 		return "user/joinOk";
 	}
 	
-	@RequestMapping(value = "/user/loginForm", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "loginForm", method = {RequestMethod.GET, RequestMethod.POST})
 	public String loginForm() {
 		System.out.println("UserController > loginForm");
 		return "user/loginForm";
 	}
 	
-	@RequestMapping(value = "/user/login", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "login", method = {RequestMethod.GET, RequestMethod.POST})
 	public String login(@ModelAttribute UserVo userVo, HttpSession session) {
 		System.out.println("UserController > login");
 		
@@ -54,7 +55,7 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value = "/user/logout", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "logout", method = {RequestMethod.GET, RequestMethod.POST})
 	public String logout(HttpSession session) {
 		System.out.println("UserController > logout");
 		session.removeAttribute("authUser");
@@ -62,7 +63,7 @@ public class UserController {
 		return "redirect:/main";
 	}
 	
-	@RequestMapping(value = "/user/modifyForm", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "modifyForm", method = {RequestMethod.GET, RequestMethod.POST})
 	public String modifyForm(HttpSession session, Model model) {
 		System.out.println("UserController > modifyForm");
 		
@@ -77,7 +78,7 @@ public class UserController {
 		return "user/modifyForm";
 	}
 	
-	@RequestMapping(value = "/user/modify", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "modify", method = {RequestMethod.GET, RequestMethod.POST})
 	public String modify(@ModelAttribute UserVo userVo, HttpSession session) {
 		System.out.println("UserController > modify");
 		userService.userUpdate(userVo);
@@ -87,7 +88,6 @@ public class UserController {
 		*/
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		authUser.setName(userVo.getName());
-		System.out.println(authUser);
 		return "redirect:/main";
 	}
 }
