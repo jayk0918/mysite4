@@ -30,5 +30,8 @@ public class BoardService {
 		return boardDao.insertContent(boardVo);
 	}
 	
+	public int hit(int no) {
+		return boardDao.hit(no);
+	}
 	
 }	

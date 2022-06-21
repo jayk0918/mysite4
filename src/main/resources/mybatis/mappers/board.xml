@@ -59,5 +59,13 @@
 		]]>
 	</insert>
 	
+	<update id = "updateHit" parameterType = "int">
+		<![CDATA[
+			update board
+			set hit = hit + 1
+			where user_no = #{no}
+		]]>
+	</update>
+	
 	
 </mapper>

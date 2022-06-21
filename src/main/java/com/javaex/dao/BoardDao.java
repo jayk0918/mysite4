@@ -38,6 +38,11 @@ public class BoardDao {
 		return count;
 	}
 	
+	public int hit(int no) {
+		int count = -1;
+		count = sqlSession.update("board.hit", no);
+		return count;
+	}
 	
 	
 	
