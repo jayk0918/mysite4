@@ -26,5 +26,10 @@ public class BoardDao {
 		return boardVo;
 	}
 	
+	public int updateContent(BoardVo boardVo) {
+		int count = -1;
+		count = sqlSession.update("board.updateContent", boardVo);
+		return count;
+	}
 	
 }

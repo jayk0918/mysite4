@@ -83,7 +83,7 @@
 							</div>
 							<c:choose>
 								<c:when test="${boardVo.userNo == authUser.no}">
-									<a id="btn_modify" href="${pageContext.request.contextPath}/modifyForm?no=${boardVo.no}">수정</a>
+									<a id="btn_modify" href="${pageContext.request.contextPath}/board/modifyForm?no=${boardVo.no}">수정</a>
 								</c:when>
 							</c:choose>
 							<a id="btn_modify" href="${pageContext.request.contextPath}/board/list">목록</a>

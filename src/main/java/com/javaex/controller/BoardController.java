@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,9 +36,22 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "modifyForm", method = {RequestMethod.GET, RequestMethod.POST})
-	public String modifyForm() {
+	public String modifyForm(@RequestParam int no, Model model) {
+		BoardVo boardVo = boardService.getContent(no);
+		model.addAttribute("boardVo", boardVo);
+		
 		return "/board/modifyForm";
 	}
+	
+	@RequestMapping(value = "modify", method = {RequestMethod.GET, RequestMethod.POST})
+	public String modify(@ModelAttribute BoardVo boardVo, @RequestParam String title, @RequestParam String content, @RequestParam int no) {
+		boardVo.setTitle(title);
+		boardVo.setContent(content);
+		boardVo.setNo(no);
+		boardService.updateContent(boardVo);
+		return "redirect:/board/list";
+	}
+	
 	
 	@RequestMapping(value = "writeForm", method = {RequestMethod.GET, RequestMethod.POST})
 	public String writeForm() {

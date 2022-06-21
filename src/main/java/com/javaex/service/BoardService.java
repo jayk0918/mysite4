@@ -22,6 +22,9 @@ public class BoardService {
 		return boardDao.getContent(no);
 	}
 	
+	public int updateContent(BoardVo boardVo) {
+		return boardDao.updateContent(boardVo);
+	}
 	
 	
 }	
