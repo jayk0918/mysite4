@@ -45,10 +45,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "modify", method = {RequestMethod.GET, RequestMethod.POST})
-	public String modify(@ModelAttribute BoardVo boardVo, @RequestParam String title, @RequestParam String content, @RequestParam int no) {
-		boardVo.setTitle(title);
-		boardVo.setContent(content);
-		boardVo.setNo(no);
+	public String modify(@ModelAttribute BoardVo boardVo) {
 		boardService.updateContent(boardVo);
 		return "redirect:/board/list";
 	}
@@ -59,10 +56,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "write", method = {RequestMethod.GET, RequestMethod.POST})
-	public String write(@ModelAttribute BoardVo boardVo, @RequestParam int no, @RequestParam String title, @RequestParam String content) {
-		boardVo.setNo(no);
-		boardVo.setTitle(title);
-		boardVo.setContent(content);
+	public String write(@ModelAttribute BoardVo boardVo) {
 		boardService.insertContent(boardVo);
 		
 		return "redirect:/board/list";
