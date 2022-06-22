@@ -59,11 +59,11 @@
 		]]>
 	</insert>
 	
-	<update id = "updateHit" parameterType = "int">
+	<update id = "hit" parameterType = "int">
 		<![CDATA[
 			update board
 			set hit = hit + 1
-			where user_no = #{no}
+			where no = #{no}
 		]]>
 	</update>
 	

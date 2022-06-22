@@ -29,6 +29,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "read", method = {RequestMethod.GET, RequestMethod.POST})
 	public String read(@RequestParam int no, Model model) {
+		boardService.hit(no);
 		BoardVo boardVo = boardService.getContent(no);
 		model.addAttribute("boardVo", boardVo);
 		
