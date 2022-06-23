@@ -28,6 +28,42 @@
 		]]>
 	</select>
 	
+	<select id="searchList" parameterType = "String" resultMap = "resultMapBoardVo">
+		<![CDATA[
+			select  br.no
+					,br.title
+					,us.name
+					,br.hit
+					,to_char(br.reg_date, 'yyyy-mm-dd') as reg_date
+					,br.user_no as user_no
+			from board br, users us
+			where br.user_no = us.no
+			and title like '%'||#{keyword}||'%'
+			order by br.no desc
+		]]>
+	</select>
+	
+	<select id="searchList2" parameterType = "String" resultMap = "resultMapBoardVo">
+		<![CDATA[
+			select  br.no
+					,br.title
+					,us.name
+					,br.hit
+					,to_char(br.reg_date, 'yyyy-mm-dd') as reg_date
+					,br.user_no as user_no
+			from board br, users us
+			where br.user_no = us.no
+		]]>
+		
+		<if test="value != '' and value != null ">
+			and title like '%'||#{keyword}||'%'
+		</if>
+		
+		<![CDATA[
+			order by br.no desc
+		]]>
+	</select>
+	
 	<select id = "getContent" resultMap = "resultMapBoardVo" resultType = "com.javaex.vo.BoardVo">
 		<![CDATA[
 			select  br.no

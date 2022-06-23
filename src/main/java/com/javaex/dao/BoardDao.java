@@ -20,6 +20,19 @@ public class BoardDao {
 		return bList;
 	}
 	
+	public List<BoardVo> searchList(String keyword){
+		List<BoardVo> bList = sqlSession.selectList("board.searchList", keyword);
+		System.out.println(bList);
+		return bList;
+	}
+	
+	public List<BoardVo> searchList2(String keyword){
+		System.out.println("dao keyword = " + keyword);
+		List<BoardVo> bList = sqlSession.selectList("board.searchList2");
+		return bList;
+	}
+	
+	
 	public BoardVo getContent(int no) {
 		BoardVo boardVo = sqlSession.selectOne("board.getContent", no);
 		System.out.println("dao : " + boardVo);

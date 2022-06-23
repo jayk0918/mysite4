@@ -58,10 +58,29 @@ public class BoardController {
 	@RequestMapping(value = "write", method = {RequestMethod.GET, RequestMethod.POST})
 	public String write(@ModelAttribute BoardVo boardVo) {
 		boardService.insertContent(boardVo);
-		
 		return "redirect:/board/list";
 	}
 	
+	@RequestMapping(value = "search", method = {RequestMethod.GET, RequestMethod.POST})
+	public String search(Model model, @RequestParam("keyword") String keyword) {
+		System.out.println("BoardController > search()");
+		System.out.println("keyword = " + keyword);
+		
+		List<BoardVo> searchList = boardService.searchList(keyword);
+		model.addAttribute("bList", searchList);
+		return "/board/list";
+	}
+	
+	@RequestMapping(value = "search2", method = {RequestMethod.GET, RequestMethod.POST})
+	public String search2(Model model,
+						  @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
+		System.out.println("BoardController > search2()");
+		System.out.println("keyword = " + keyword);
+		
+		List<BoardVo> searchList = boardService.searchList2(keyword);
+		model.addAttribute("bList", searchList);
+		return "/board/list";
+	}
 	
 	
 }

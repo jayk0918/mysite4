@@ -15,7 +15,17 @@ public class BoardService {
 	private BoardDao boardDao;
 	
 	public List<BoardVo> getList(){
+		System.out.println("BoardService > getList");
 		return boardDao.getList();
+	}
+	
+	public List<BoardVo> searchList(String keyword){
+		System.out.println("BoardService > getList2");
+		return boardDao.searchList(keyword);
+	}
+	
+	public List<BoardVo> searchList2(String keyword){
+		return boardDao.searchList2(keyword);
 	}
 	
 	public BoardVo getContent(int no) {
