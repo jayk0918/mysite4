@@ -24,11 +24,12 @@ public class BoardService {
 		return boardDao.searchList(keyword);
 	}
 	
-	public List<BoardVo> searchList2(String keyword){
-		return boardDao.searchList2(keyword);
+	public List<BoardVo> searchList2(String keyword, String content){
+		return boardDao.searchList2(keyword, content);
 	}
 	
 	public BoardVo getContent(int no) {
+		boardDao.hit(no);
 		return boardDao.getContent(no);
 	}
 	

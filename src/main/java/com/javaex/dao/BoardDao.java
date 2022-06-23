@@ -26,12 +26,11 @@ public class BoardDao {
 		return bList;
 	}
 	
-	public List<BoardVo> searchList2(String keyword){
+	public List<BoardVo> searchList2(String keyword, String content){
 		System.out.println("dao keyword = " + keyword);
-		List<BoardVo> bList = sqlSession.selectList("board.searchList2");
+		List<BoardVo> bList = sqlSession.selectList("board.searchList2", keyword);
 		return bList;
 	}
-	
 	
 	public BoardVo getContent(int no) {
 		BoardVo boardVo = sqlSession.selectOne("board.getContent", no);

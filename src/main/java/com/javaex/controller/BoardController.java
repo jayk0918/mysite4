@@ -29,7 +29,6 @@ public class BoardController {
 	
 	@RequestMapping(value = "read", method = {RequestMethod.GET, RequestMethod.POST})
 	public String read(@RequestParam int no, Model model) {
-		boardService.hit(no);
 		BoardVo boardVo = boardService.getContent(no);
 		model.addAttribute("boardVo", boardVo);
 		
@@ -73,11 +72,13 @@ public class BoardController {
 	
 	@RequestMapping(value = "search2", method = {RequestMethod.GET, RequestMethod.POST})
 	public String search2(Model model,
-						  @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
+						  @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+						  @RequestParam(value = "content", required = false, defaultValue = "") String content) {
 		System.out.println("BoardController > search2()");
 		System.out.println("keyword = " + keyword);
 		
-		List<BoardVo> searchList = boardService.searchList2(keyword);
+		
+		List<BoardVo> searchList = boardService.searchList2(keyword, content);
 		model.addAttribute("bList", searchList);
 		return "/board/list";
 	}
