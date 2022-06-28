@@ -129,12 +129,25 @@ function render(guestBookVo){
 	var str = '';
 	//$('#listArea').append(name + '<br>');
 	
-	str += '<colgroup>';
-	str += '';
-	str += '';
-	str += '</colgroup>';
+	str += '<table class = 'guestRead'>;
+	str += '	<colgroup>';
+	str += '		<col style='width : 10%;'>';
+	str += '		<col style='width : 40%;'>';
+	str += '		<col style='width : 40%;'>';
+	str += '		<col style='width : 10%;'>';
+	str += '	</colgroup>';
+	str += '	<tr>';
+	str += '		<td>1234</td>';
+	str += '		<td>이정재</td>';
+	str += '		<td>2020-03-03</td>';
+	str += '		<td><a href = ''></a></td>';
+	str += '	</tr>';
+	str += '	<tr>';
+	str += '		<td colspan = '4' class = 'text-left'>방명록 글</td>';
+	str += '	</tr>';
+	str += '</table>;
 	
-	
+	$('#listArea').append(str);
 }
 
 	
