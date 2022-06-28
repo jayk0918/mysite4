@@ -50,41 +50,33 @@
 				<!-- //content-head -->
 
 				<div id="guestbook">
-					<form action="" method="">
-						<table id="guestAdd">
-							<colgroup>
-								<col style="width: 70px;">
-								<col>
-								<col style="width: 70px;">
-								<col>
-							</colgroup>
-							<tbody>
-								<tr>
-									<th><label class="form-text" for="input-uname">이름</label></td>
-									<td><input id="input-uname" type="text" name="name"></td>
-									<th><label class="form-text" for="input-pass">패스워드</label></td>
-									<td><input id="input-pass"type="password" name="pass"></td>
-								</tr>
-								<tr>
-									<td colspan="4"><textarea name="content" cols="72" rows="5"></textarea></td>
-								</tr>
-								<tr class="button-area">
-									<td colspan="4" class="text-center"><button type="submit">등록</button></td>
-								</tr>
-							</tbody>
-							
-						</table>
-						<!-- //guestWrite -->
-						<input type="hidden" name="action" value="add">
-						
-					</form>	
-					
-					
-					
-					
-					
-					
-					</div>
+					<table id="guestAdd">
+						<colgroup>
+							<col style="width: 70px;">
+							<col>
+							<col style="width: 70px;">
+							<col>
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><label class="form-text" for="input-uname">이름</label></th>
+								<td><input id="input-uname" type="text" name="name" value = ""></td>
+								<th><label class="form-text" for="input-pass">패스워드</label></th>
+								<td><input id="input-pass"type="password" name="password"></td>
+							</tr>
+							<tr>
+								<td colspan="4"><textarea name="content" cols="72" rows="5"></textarea></td>
+							</tr>
+							<tr class="button-area">
+								<td colspan="4" class="text-center"><button type="submit">등록</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<div id = 'listArea'>
+				</div>					
+				
 				<!-- //guestbook -->
 			
 			</div>
@@ -102,53 +94,97 @@
 
 <script type='text/javascript'>
 $(document).ready(function(){
-	console.log('jquery request');
+	fetchList();
 })
 
 
-$.ajax({
-	url : "${pageContext.request.contextPath }/api/guestbook/list",
-	type : "post",
-	// contentType : "application/json",
-	// data : {name: '심영'},
-	dataType : "json",
-	success : function(guestBookList){
-		console.log(guestBookList);
-		
-		for(var i=0; i<guestBookList.length; i++){
-			render(guestBookList[i]);
-		}
-		
-	},
-	error : function(XHR, status, error) {
-		console.log(status + ' : ' + error);
-	} });
+$('#btnSubmit').on('click', function(){
+	var name = $('[name = "name"]').val();
+	var password = $('[name = "password"]').val();
+	var content = $('[name = "content"]').val();
+	var guestVo = {
+			name: name,
+			password: password,
+			content: content
+	}
 	
-function render(guestBookVo){
+	$.ajax({
+		//url : "${pageContext.request.contextPath }/api/guestbook/add?name="+name+"&password="+password+"&content="+content,
+		url : "${pageContext.request.contextPath }/api/guestbook/add",
+		type : "post",
+		data : guestVo,
+		// contentType : "application/json",
+		dataType : "json",
+		success : function(gVo){
+			render(gVo,'up');
+			
+			$('[name = "name"]').val('');
+			$('[name = "password"]').val('');
+			$('[name = "content"]').val('');
+			
+		},
+		error : function(XHR, status, error) {
+			console.log(status + ' : ' + error);
+		} });
+});
+
+function fetchList(){
+	$.ajax({
+		url : "${pageContext.request.contextPath }/api/guestbook/list",
+		type : "post",
+		// contentType : "application/json",
+		// data : {name: '심영'},
+		dataType : "json",
+		success : function(guestBookList){
+			console.log(guestBookList);
+			
+			for(var i=0; i<guestBookList.length; i++){
+				render(guestBookList[i], 'down');
+			}
+			
+		},
+		error : function(XHR, status, error) {
+			console.log(status + ' : ' + error);
+		}
+	});
+}
+
+function render(guestBookVo, opt){
 	console.log('render()');
 	var str = '';
 	//$('#listArea').append(name + '<br>');
 	
-	str += '<table class = 'guestRead'>;
+	str += '<table class = "guestRead">';
 	str += '	<colgroup>';
-	str += '		<col style='width : 10%;'>';
-	str += '		<col style='width : 40%;'>';
-	str += '		<col style='width : 40%;'>';
-	str += '		<col style='width : 10%;'>';
+	str += '		<col style= "width : 10%;">';
+	str += '		<col style= "width : 40%;">';
+	str += '		<col style= "width : 40%;">';
+	str += '		<col style= "width : 10%;">';
 	str += '	</colgroup>';
 	str += '	<tr>';
-	str += '		<td>1234</td>';
-	str += '		<td>이정재</td>';
-	str += '		<td>2020-03-03</td>';
-	str += '		<td><a href = ''></a></td>';
+	str += '		<td>'+guestBookVo.no+'</td>';
+	str += '		<td>'+guestBookVo.name+'</td>';
+	str += '		<td>'+guestBookVo.date+'</td>';
+	str += '		<td><a href =""></a>삭제</td>';
 	str += '	</tr>';
 	str += '	<tr>';
-	str += '		<td colspan = '4' class = 'text-left'>방명록 글</td>';
+	str += '		<td colspan = 4 class = "text-left">'+guestBookVo.content+'</td>';
 	str += '	</tr>';
-	str += '</table>;
+	str += '</table>';
 	
-	$('#listArea').append(str);
+	if(opt == 'down'){
+		$('#listArea').append(str);
+	}else if(opt == 'up'){
+		$('#listArea').prepend(str);
+	}else{
+		console.log('opt error');
+	}
+	
+	
+	
 }
+
+
 
 	
 </script>

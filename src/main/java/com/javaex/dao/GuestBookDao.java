@@ -34,5 +34,17 @@ public class GuestBookDao {
 		return count;
 	}
 	
+	public int insertGuest(GuestBookVo guestBookVo) {
+		int count = -1;
+		System.out.println("GuestBookDao > insertGuest");
+		count = sqlSession.insert("guestbook.insertSelectKey", guestBookVo);
+		return count;
+	}
+	
+	public GuestBookVo getGuest(int no) {
+		
+		GuestBookVo gVo = sqlSession.selectOne("guestbook.getGuest", no);
+		return gVo;
+	}
 	
 }

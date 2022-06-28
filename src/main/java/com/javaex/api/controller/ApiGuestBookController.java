@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +16,6 @@ import com.javaex.vo.GuestBookVo;
 public class ApiGuestBookController {
 	@Autowired
 	private GuestBookService guestBookService;
-	
 	
 	@RequestMapping(value="/api/guestbook/addList", method = {RequestMethod.GET, RequestMethod.POST})
 	public String addList() {
@@ -36,6 +36,22 @@ public class ApiGuestBookController {
 		List<GuestBookVo>gList = guestBookService.getList();
 		return gList;
 	}
+	
+	// 방명록 저장
+	@RequestMapping(value = "/api/guestbook/add", method= {RequestMethod.GET, RequestMethod.POST})
+	public String add(@ModelAttribute GuestBookVo guestBookVo) {
+		System.out.println("ApiGuestBookController > add()");
+		
+		guestBookService.insertGuest(guestBookVo);
+		
+		return "redirect:/api/guestbook/addList";
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 }
