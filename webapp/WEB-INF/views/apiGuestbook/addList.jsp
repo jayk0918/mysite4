@@ -29,8 +29,8 @@
 			<div id="aside">
 				<h2>방명록</h2>
 				<ul>
-					<li>일반방명록</li>
-					<li>ajax방명록</li>
+					<li><a href="${pageContext.request.contextPath}/guestbook/addList">일반방명록</a></li>
+					<li><a href="${pageContext.request.contextPath}/api/guestbook/addList">ajax방명록</a></li>
 				</ul>
 			</div>
 			<!-- //aside -->
@@ -60,7 +60,7 @@
 						<tbody>
 							<tr>
 								<th><label class="form-text" for="input-uname">이름</label></th>
-								<td><input id="input-uname" type="text" name="name" value = ""></td>
+								<td><input id="input-uname" type="text" name="name"></td>
 								<th><label class="form-text" for="input-pass">패스워드</label></th>
 								<td><input id="input-pass"type="password" name="password"></td>
 							</tr>
@@ -68,7 +68,7 @@
 								<td colspan="4"><textarea name="content" cols="72" rows="5"></textarea></td>
 							</tr>
 							<tr class="button-area">
-								<td colspan="4" class="text-center"><button type="submit">등록</button></td>
+								<td colspan="4" class="text-center"><button id = 'btnSubmit' type="submit">등록</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -117,11 +117,9 @@ $('#btnSubmit').on('click', function(){
 		dataType : "json",
 		success : function(gVo){
 			render(gVo,'up');
-			
 			$('[name = "name"]').val('');
 			$('[name = "password"]').val('');
 			$('[name = "content"]').val('');
-			
 		},
 		error : function(XHR, status, error) {
 			console.log(status + ' : ' + error);
@@ -141,7 +139,6 @@ function fetchList(){
 			for(var i=0; i<guestBookList.length; i++){
 				render(guestBookList[i], 'down');
 			}
-			
 		},
 		error : function(XHR, status, error) {
 			console.log(status + ' : ' + error);
@@ -154,23 +151,23 @@ function render(guestBookVo, opt){
 	var str = '';
 	//$('#listArea').append(name + '<br>');
 	
-	str += '<table class = "guestRead">';
-	str += '	<colgroup>';
-	str += '		<col style= "width : 10%;">';
-	str += '		<col style= "width : 40%;">';
-	str += '		<col style= "width : 40%;">';
-	str += '		<col style= "width : 10%;">';
-	str += '	</colgroup>';
-	str += '	<tr>';
-	str += '		<td>'+guestBookVo.no+'</td>';
-	str += '		<td>'+guestBookVo.name+'</td>';
-	str += '		<td>'+guestBookVo.date+'</td>';
-	str += '		<td><a href =""></a>삭제</td>';
-	str += '	</tr>';
-	str += '	<tr>';
-	str += '		<td colspan = 4 class = "text-left">'+guestBookVo.content+'</td>';
-	str += '	</tr>';
-	str += '</table>';
+	str += '<table class="guestRead">' ;
+	str += '    <colgroup>' ;
+	str += '        <col style="width: 10%;">' ;
+	str += '        <col style="width: 40%;">' ;
+	str += '        <col style="width: 40%;">' ;
+	str += '        <col style="width: 10%;">' ;
+	str += '    </colgroup>' ;
+	str += '    <tr>' ;
+	str += '        <td>'+guestBookVo.no+'</td>' ;
+	str += '        <td>'+guestBookVo.name+'</td>' ;
+	str += '        <td>'+guestBookVo.date+'</td>' ;
+	str += '        <td><a href="${pageContext.request.contextPath}/api/guestbook/deleteForm?no='+guestBookVo.no+'">[삭제]</a></td>' ;
+	str += '    </tr>' ;
+	str += '    <tr>' ;
+	str += '        <td colspan=4 class="text-left">'+guestBookVo.content+'</td>' ;
+	str += '    </tr>' ;
+	str += '</table>' ;
 	
 	if(opt == 'down'){
 		$('#listArea').append(str);
@@ -180,11 +177,7 @@ function render(guestBookVo, opt){
 		console.log('opt error');
 	}
 	
-	
-	
 }
-
-
 
 	
 </script>

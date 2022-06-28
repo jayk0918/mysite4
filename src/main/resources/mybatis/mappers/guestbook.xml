@@ -63,6 +63,13 @@
 		]]>
 	</select>
 	
+	<delete id = "deleteGuest" parameterType = "com.javaex.GuestBookVo">
+		<![CDATA[
+			delete guestbook
+			where no = #{no}
+			and password = #{password}
+		]]>
+	</delete>
 	
 	
 

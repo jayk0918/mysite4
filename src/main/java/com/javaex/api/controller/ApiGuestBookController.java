@@ -38,18 +38,22 @@ public class ApiGuestBookController {
 	}
 	
 	// 방명록 저장
+	@ResponseBody
 	@RequestMapping(value = "/api/guestbook/add", method= {RequestMethod.GET, RequestMethod.POST})
-	public String add(@ModelAttribute GuestBookVo guestBookVo) {
+	public GuestBookVo add(@ModelAttribute GuestBookVo guestBookVo) {
 		System.out.println("ApiGuestBookController > add()");
 		
-		guestBookService.insertGuest(guestBookVo);
+		GuestBookVo gVo = guestBookService.insertGuest(guestBookVo);
 		
-		return "redirect:/api/guestbook/addList";
+		return gVo;
 	}
 	
-	
-	
-	
+	@ResponseBody
+	@RequestMapping(value = "/api/guestbook/delete", method = {RequestMethod.GET, RequestMethod.POST})
+	public String delete(@ModelAttribute GuestBookVo guestBookVo) {
+		guestBookService.deleteGuest(guestBookVo);
+		return "redirect:/api/guestbook/addList";
+	}
 	
 	
 	
