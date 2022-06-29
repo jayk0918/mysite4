@@ -56,7 +56,9 @@
 		]]>
 		
 		<if test="value != '' and value != null ">
-			and title like '%'||#{keyword}||'%'
+			and
+			(br.title like '%'||#{title}||'%'
+			or us.name like '%'||#{name}||'%')
 		</if>
 		
 		<![CDATA[
