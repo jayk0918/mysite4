@@ -6,8 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- css  -->
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
+
 
 </head>
 
@@ -53,12 +56,18 @@
 						<form action="${pageContext.request.contextPath}/board/search2" method="get">
 							<div class="form-group text-right">
 								<select name = 'content'>
-									<option value=''>선택하세요</option>
-									<option value='title'>제목</option>
-									<option value='name'>글쓴이</option>
+									<option value = "">선택</option>
+									<option id = "searchTitle">제목</option>
+									<option id = "searchName">글쓴이</option>
 								</select>
-								<input type="text" name = "keyword">
-								<button type="submit" id=btn_search>검색</button>
+								<c:if test = >
+									<input type="text" name = "keyword">
+								</c:if>
+								<c:if test = >
+									<input type="text" name = "keyword">
+								</c:if>
+									<button type="submit" id=btnSearch>검색</button>
+								
 							</div>
 						</form>
 						<table>
