@@ -46,11 +46,5 @@ public class GuestBookDao {
 		return gVo;
 	}
 	
-	public int deleteGuest(GuestBookVo guestBookVo) {
-		int count = -1;
-		count = sqlSession.delete("guestbook.deleteGuest", guestBookVo);
-		return count;
-	}
-	
 	
 }

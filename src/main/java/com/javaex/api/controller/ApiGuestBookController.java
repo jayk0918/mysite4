@@ -48,13 +48,15 @@ public class ApiGuestBookController {
 		return gVo;
 	}
 	
+	// 방명록 삭제
 	@ResponseBody
-	@RequestMapping(value = "/api/guestbook/delete", method = {RequestMethod.GET, RequestMethod.POST})
-	public String delete(@ModelAttribute GuestBookVo guestBookVo) {
-		guestBookService.deleteGuest(guestBookVo);
-		return "redirect:/api/guestbook/addList";
+	@RequestMapping(value = "/api/guestbook/remove", method= {RequestMethod.GET, RequestMethod.POST})
+	public String remove(@ModelAttribute GuestBookVo guestBookVo) {
+
+		String status = guestBookService.deleteList(guestBookVo);
+		
+		return status;
 	}
-	
 	
 	
 	

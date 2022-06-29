@@ -8,9 +8,13 @@
 <!-- css -->
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+
 
 <!-- jquery -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
+
 
 </head>
 
@@ -90,13 +94,36 @@
 	</div>
 	<!-- //wrap -->
 
+
+
+
+<!-- MODAL -->
+<div id = "delModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">비밀번호 입력</h4>
+      </div>
+      <div class="modal-body">
+      	<label for = "password">비밀번호</label>
+      	<input type = "password" name = "password"></input>
+      	<input type = "hidden" name = "no"></input>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id = "btnModalDelete" type="button" class="btn btn-primary">Delete</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 </body>
 
 <script type='text/javascript'>
 $(document).ready(function(){
 	fetchList();
 })
-
 
 $('#btnSubmit').on('click', function(){
 	var name = $('[name = "name"]').val();
@@ -126,6 +153,62 @@ $('#btnSubmit').on('click', function(){
 		} });
 });
 
+/*
+$('#btnTest').on('click', function(){
+	console.log('testbutton')
+	
+	$('#delModal').modal('show');
+});
+*/
+
+$("#listArea").on("click", ".btnDelete", function(){
+	var $this = $(this);
+	var no = $this.data("no");
+	// modal창 내부 no값
+	$("[name = 'no']").val(no);
+	$("#delModal [name = 'password']").val(""); //#delModal의 하위 클래스로 특정(안할 시 전역의 password에 val값 적용)
+	$("#delModal").modal("show");
+});
+
+$("#btnModalDelete").on("click", function(){
+	console.log('modal click');
+	
+	var password = $('#delModal [name="password"]').val();
+	var no = $('#delModal [name="no"]').val();
+	
+	var guestBookVo = {
+		password: password,
+		no: no
+	};
+	
+	
+	$.ajax({
+		url : "${pageContext.request.contextPath}/api/guestbook/remove",
+		type : "post",
+		// contentType : "application/json",
+		data : guestBookVo,
+		dataType : "json",
+		success : function(result){
+			if(result == "success"){
+				$("#t"+no).remove();
+				$("#delModal").modal("hide");
+			}else{
+				alert("반동이다! 전위대! 전위대!");
+			}
+			
+		},
+		error : function(XHR, status, error) {
+			console.log(status + ' : ' + error);
+		}
+	});
+	
+	
+	
+	
+})
+
+
+
 function fetchList(){
 	$.ajax({
 		url : "${pageContext.request.contextPath }/api/guestbook/list",
@@ -151,7 +234,7 @@ function render(guestBookVo, opt){
 	var str = '';
 	//$('#listArea').append(name + '<br>');
 	
-	str += '<table class="guestRead">' ;
+	str += '<table id="t'+guestBookVo.no+'"class="guestRead">' ;
 	str += '    <colgroup>' ;
 	str += '        <col style="width: 10%;">' ;
 	str += '        <col style="width: 40%;">' ;
@@ -162,7 +245,7 @@ function render(guestBookVo, opt){
 	str += '        <td>'+guestBookVo.no+'</td>' ;
 	str += '        <td>'+guestBookVo.name+'</td>' ;
 	str += '        <td>'+guestBookVo.date+'</td>' ;
-	str += '        <td><a href="${pageContext.request.contextPath}/api/guestbook/deleteForm?no='+guestBookVo.no+'">[삭제]</a></td>' ;
+	str += '        <td><button class = "btnDelete" type = "button" data-no = '+guestBookVo.no+'>삭제</button></td>' ;
 	str += '    </tr>' ;
 	str += '    <tr>' ;
 	str += '        <td colspan=4 class="text-left">'+guestBookVo.content+'</td>' ;
@@ -179,8 +262,7 @@ function render(guestBookVo, opt){
 	
 }
 
-	
-</script>
 
+</script>
 
 </html>

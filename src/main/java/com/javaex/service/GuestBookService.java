@@ -22,8 +22,18 @@ public class GuestBookService {
 		return guestBookDao.addList(guestBookVo);
 	}
 	
-	public int deleteList(GuestBookVo guestBookVo) {
-		return guestBookDao.deleteList(guestBookVo);
+	public String deleteList(GuestBookVo guestBookVo) {
+		int count = guestBookDao.deleteList(guestBookVo);
+		
+		String status;
+		
+		if(count>0) {
+			status = "success";
+		}else {
+			status = "fail";
+		}
+		
+		return status;
 	}
 	
 	public GuestBookVo insertGuest(GuestBookVo guestBookVo) {
@@ -36,8 +46,5 @@ public class GuestBookService {
 		return gVo;
 	}
 	
-	public int deleteGuest(GuestBookVo guestBookVo) {
-		return guestBookDao.deleteGuest(guestBookVo);
-	}
 	
 }
