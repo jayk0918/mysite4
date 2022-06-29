@@ -60,7 +60,7 @@
 							<tr>
 								<td>비밀번호</td>
 								<td><input type="password" name="password"></td>
-								<td class="text-left"><button id = 'btnSubmit' type="submit">삭제</button></td>
+								<td class="text-left"><button type="submit">삭제</button></td>
 								<td><a href="${pageContext.request.contextPath}/guestbook/addList">[메인으로 돌아가기]</a></td>
 							</tr>
 						</table>
