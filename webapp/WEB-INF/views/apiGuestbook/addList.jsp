@@ -11,6 +11,7 @@
 <link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 
 
+
 <!-- jquery -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
@@ -76,10 +77,11 @@
 							</tr>
 						</tbody>
 					</table>
+					
+					<div id = 'listArea'>
+					</div>
+						
 				</div>
-				
-				<div id = 'listArea'>
-				</div>					
 				
 				<!-- //guestbook -->
 			
@@ -105,14 +107,17 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">비밀번호 입력</h4>
       </div>
+      
       <div class="modal-body">
       	<label for = "password">비밀번호</label>
       	<input type = "password" name = "password"></input>
       	<input type = "hidden" name = "no"></input>
       </div>
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button id = "btnModalDelete" type="button" class="btn btn-primary">Delete</button>
+        
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -201,10 +206,6 @@ $("#btnModalDelete").on("click", function(){
 			console.log(status + ' : ' + error);
 		}
 	});
-	
-	
-	
-	
 })
 
 
@@ -232,9 +233,8 @@ function fetchList(){
 function render(guestBookVo, opt){
 	console.log('render()');
 	var str = '';
-	//$('#listArea').append(name + '<br>');
 	
-	str += '<table id="t'+guestBookVo.no+'"class="guestRead">' ;
+	str += '<table id="t'+guestBookVo.no+'" class="guestRead">';
 	str += '    <colgroup>' ;
 	str += '        <col style="width: 10%;">' ;
 	str += '        <col style="width: 40%;">' ;
