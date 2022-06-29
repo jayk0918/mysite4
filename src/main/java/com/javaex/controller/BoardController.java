@@ -71,15 +71,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "search2", method = {RequestMethod.GET, RequestMethod.POST})
-	public String search2(Model model,
-						  @RequestParam(value = "title", required = false, defaultValue = "") String title,
-						  @RequestParam(value = "name", required = false, defaultValue = "") String name) {
+	public String search2(Model model, @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
 		System.out.println("BoardController > search2()");
-		System.out.println("title = " + title);
-		System.out.println("name = " + name);
+		System.out.println("keyword= " + keyword);
 		
 		
-		List<BoardVo> searchList = boardService.searchList2(title, name);
+		List<BoardVo> searchList = boardService.searchList2(keyword);
 		model.addAttribute("bList", searchList);
 		return "/board/list";
 	}

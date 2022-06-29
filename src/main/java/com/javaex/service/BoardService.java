@@ -24,8 +24,8 @@ public class BoardService {
 		return boardDao.searchList(keyword);
 	}
 	
-	public List<BoardVo> searchList2(String title, String name){
-		return boardDao.searchList2(title, name);
+	public List<BoardVo> searchList2(String keyword){
+		return boardDao.searchList2(keyword);
 	}
 	
 	public BoardVo getContent(int no) {

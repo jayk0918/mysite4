@@ -26,17 +26,9 @@ public class BoardDao {
 		return bList;
 	}
 	
-	public List<BoardVo> searchList2(String title, String name){
-		System.out.println("dao keyword = " + title);
-		System.out.println("dao keyword = " + name);
-		List<BoardVo> bList = null;
-		if(title != null) {
-			bList = sqlSession.selectList("board.searchList2", title);
-		}else if(name != null) {
-			bList = sqlSession.selectList("board.searchList2", name);
-		}else {
-			bList = null;
-		}
+	public List<BoardVo> searchList2(String keyword){
+		System.out.println("dao keyword = " + keyword);
+		List<BoardVo> bList = sqlSession.selectList("board.searchList2", keyword);
 		return bList;
 	}
 	
