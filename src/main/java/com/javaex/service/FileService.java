@@ -24,7 +24,7 @@ public class FileService {
 		System.out.println("FileService>save()");
 		System.out.println(file.getOriginalFilename());
 		
-		String saveDir = "/Users/jaykim0918/Downloads/BufferedWriter/";
+		String saveDir = "/Users/jaykim0918/javaStudy/upload/";
 		
 		// 원본파일명
 		String orgName = file.getOriginalFilename();
@@ -58,9 +58,7 @@ public class FileService {
 			e.printStackTrace();
 		}
 		
-		
-		
-		return "";
+		return saveName;
 	}
 	
 	
