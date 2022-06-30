@@ -130,6 +130,36 @@ $(document).ready(function(){
 	fetchList();
 })
 
+// jquery 요청(json)
+$('#btnSubmit').on('click', function(){
+	var name = $('[name = "name"]').val();
+	var password = $('[name = "password"]').val();
+	var content = $('[name = "content"]').val();
+	var guestVo = {
+			name: name,
+			password: password,
+			content: content
+	}
+	console.log(guestVo);
+	console.log(JSON.stringify(guestVo));
+	$.ajax({
+		url : "${pageContext.request.contextPath }/api/guestbook/add2",
+		type : "post",
+		contentType : "application/json",
+		data : JSON.stringify(guestVo),	// js객체를 문자열로 변경
+		dataType : "json",
+		success : function(gVo){
+			render(gVo,'up');
+			$('[name = "name"]').val('');
+			$('[name = "password"]').val('');
+			$('[name = "content"]').val('');
+		},
+		error : function(XHR, status, error) {
+			console.log(status + ' : ' + error);
+		} });
+});
+
+/* jquery 요청(파라미터)
 $('#btnSubmit').on('click', function(){
 	var name = $('[name = "name"]').val();
 	var password = $('[name = "password"]').val();
@@ -157,6 +187,7 @@ $('#btnSubmit').on('click', function(){
 			console.log(status + ' : ' + error);
 		} });
 });
+*/
 
 /*
 $('#btnTest').on('click', function(){
