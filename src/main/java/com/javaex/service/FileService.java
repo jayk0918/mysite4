@@ -58,6 +58,9 @@ public class FileService {
 			e.printStackTrace();
 		}
 		
+		// DB 저장
+		fileDao.fileInsert(fileVo);
+		
 		return saveName;
 	}
 	
