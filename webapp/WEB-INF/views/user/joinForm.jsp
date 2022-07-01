@@ -6,8 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- css -->
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+
+
+<!-- jquery -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
 
 </head>
 
@@ -49,7 +57,7 @@
 
 				<div id="user">
 					<div id="joinForm">
-						<form action="join" method="get">
+						<form id = "join-form" action="join" method="get">
 
 							<!-- 아이디 -->
 							<div class="form-group">
@@ -61,7 +69,7 @@
 							<!-- 비밀번호 -->
 							<div class="form-group">
 								<label class="form-text" for="input-pass">패스워드</label>
-								<input type="password" id="input-pass" name="password" value="" placeholder="비밀번호를 입력하세요">
+								<input type="password" id="input-password" name="password" value="" placeholder="비밀번호를 입력하세요">
 							</div>
 
 							<!-- 이름 -->
@@ -110,7 +118,84 @@
 
 	</div>
 	<!-- //wrap -->
+	
+
+<!-- MODAL -->
+<div id = "duplicateModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">비밀번호 입력</h4>
+      </div>
+      
+      <div class="modal-body">
+      	<label for = "password">비밀번호</label>
+      	<input type = "password" name = "password"></input>
+      	<input type = "hidden" name = "no"></input>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id = "btnModalDelete" type="button" class="btn btn-primary">Delete</button>
+        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 
 </body>
+
+<script type = 'text/javascript'>
+
+$("#join-form").on("submit", function(){
+	console.log("회원가입 버튼");
+	
+	var id = $("input-uid").val();
+	var password = $("input-password").val();
+	var name = $("input-name").val();
+	var policy = $("#chk-agree").is(":checked");
+	
+	
+	if(id == "" || id == null){
+		alert("아이디 입력");
+		return false;
+	}
+	
+	if(password == "" || password == null){
+		alert("패스워드 입력");
+		return false;
+	}
+	
+	if(name == "" || name == null){
+		alert("이름 입력");
+		return false;
+	}
+	
+	if(policy == false){
+		alert("약관 동의 필요");
+		return false;
+	}
+})
+
+/*
+$("#btn-submit").on("click", function(){
+	console.log("회원가입 버튼");
+	
+	event.preventDefault();	// html 락다운
+	
+	var id = $("#input-uid").val();
+	
+	if(id == null){
+		alert("아이디 없음")
+		return false;
+	}
+})
+*/
+
+</script>
+
+
 
 </html>

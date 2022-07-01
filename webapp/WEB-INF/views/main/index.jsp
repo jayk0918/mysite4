@@ -30,7 +30,7 @@
 				<!-- content-head 없음 -->
 				<div id="index">
 
-					<img id="profile-img" src="${pageContext.request.contextPath}/assets/image/profile.jpg">
+					<img id="profile-img" src="${pageContext.request.contextPath}/assets/image/doctor.png">
 
 					<div id="greetings">
 						<p class="text-xlarge">
