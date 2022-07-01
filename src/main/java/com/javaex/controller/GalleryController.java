@@ -25,9 +25,13 @@ public class GalleryController {
 	}
 	
 	@RequestMapping(value="/gallery/upload", method = {RequestMethod.GET, RequestMethod.POST})
-	public String upload(@RequestParam(value="file") MultipartFile file, Model model) {
+	public String upload(@RequestParam(value="userNo") int userNo,
+						 @RequestParam(value="content") String content,
+						 @RequestParam(value="file") MultipartFile file,
+						 Model model) {
+		System.out.println("GalleryController > upload()");
 		
-		String saveName = galleryService.save(file);
+		String saveName = galleryService.save(userNo, content, file);
 		
 		model.addAttribute("saveName", saveName);
 		

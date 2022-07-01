@@ -26,7 +26,7 @@ public class GalleryService {
 		return gList;
 	}
 	
-	public String save(MultipartFile file) {
+	public String save(int userNo, String content, MultipartFile file) {
 		
 		String saveDir = "/Users/jaykim0918/javaStudy/upload/";
 		String orgName = file.getOriginalFilename();
@@ -42,6 +42,8 @@ public class GalleryService {
 		galleryVo.setSaveName(saveName);
 		galleryVo.setFilePath(filePath);
 		galleryVo.setFileSize(fileSize);
+		galleryVo.setUserNo(userNo);
+		galleryVo.setContent(content);
 		
 		try {
 			byte[] fileData = file.getBytes();
@@ -62,6 +64,7 @@ public class GalleryService {
 		
 		return saveName;
 	}
+	
 	
 	
 }

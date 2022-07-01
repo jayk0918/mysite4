@@ -31,15 +31,12 @@
 	<insert id = "insertImg" parameterType = "com.javaex.vo.GalleryVo">
 		<![CDATA[
 			insert into gallery
-			values	(	
-						seq_gallery_no.nextval
-						,#{userNo}
-						,#{content}
-						,#{filePath}
-						,#{orgName}
-						,#{saveName}
-						,#{fileSize}
-					);
+			values	(seq_gallery_no.nextval ,#{userNo}
+					,#{content}
+					,#{filePath}
+					,#{orgName}
+					,#{saveName}
+					,#{fileSize})
 		]]>
 	</insert>
 	
