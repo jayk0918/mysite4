@@ -23,7 +23,7 @@ public class GalleryDao {
 	
 	public int imgInsert(GalleryVo galleryVo) {
 		
-		int count = sqlSession.insert("insertImg", galleryVo);
+		int count = sqlSession.insert("gallery.insertImg", galleryVo);
 		System.out.println(count + "건 저장되었습니다.");
 		return count;
 	}

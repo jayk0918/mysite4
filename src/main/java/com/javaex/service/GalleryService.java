@@ -57,6 +57,8 @@ public class GalleryService {
 		
 		galleryDao.imgInsert(galleryVo);
 		
+		System.out.println(galleryVo);
+		System.out.println(saveName);
 		
 		return saveName;
 	}

@@ -93,15 +93,18 @@
 					<h4 class="modal-title">이미지등록</h4>
 				</div>
 				
-				<form method="" action="" >
+				<form method="get" action="" >
 					<div class="modal-body">
 						<div class="form-group">
 							<label class="form-text">글작성</label>
-							<input id="addModalContent" type="text" name="" value="" >
+							<input id="addModalContent" type="text" name="content" value="" >
 						</div>
 						<div class="form-group">
 							<label class="form-text">이미지선택</label>
-							<input id="file" type="file" name="" value="" >
+							<input id="file" type="file" name="file" value="" >
+						</div>
+						<div>
+							<input id="userNo" type = "hidden" name = "userNo" value = "${authUser.no}">
 						</div>
 					</div>
 					<div class="modal-footer">
