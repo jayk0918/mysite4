@@ -1,5 +1,7 @@
 package com.javaex.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.GalleryService;
+import com.javaex.vo.GalleryVo;
 
 @Controller
 public class GalleryController {
@@ -17,10 +20,9 @@ public class GalleryController {
 	private GalleryService galleryService;
 
 	@RequestMapping(value="/gallery/list", method = {RequestMethod.GET, RequestMethod.POST})
-	public String list() {
-		
-		galleryService.getList();
-		
+	public String list(Model model) {
+		List<GalleryVo> gList = galleryService.getList();
+		model.addAttribute("gList", gList);
 		return "gallery/list";
 	}
 	

@@ -16,14 +16,12 @@
 
 	<select id = "getList" resultMap = "resultMapGallery">
 		<![CDATA[
-			select	no
-					,user_no
-					,content
-					,filePath
-					,orgName
-					,saveName
-					,fileSize
-			from gallery
+			select	gl.no
+					,us.name
+					,gl.content
+					,gl.user_no
+			from gallery gl, users us
+			where gl.user_no = us.no
 		]]>
 	
 	</select>
