@@ -62,7 +62,7 @@
 						<c:forEach items="${gList}" var="GalleryVo">
 							<li>
 								<div class="view" >
-									<img class="imgItem" src="${pageContext.request.contextPath}/upload/${saveName}">
+									<img class="imgItem" src="${pageContext.request.contextPath}/upload/${GalleryVo.saveName}">
 									<div class="imgWriter">작성자: <strong>${GalleryVo.userName}</strong></div>
 								</div>
 							</li>

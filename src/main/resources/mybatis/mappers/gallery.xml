@@ -20,6 +20,7 @@
 					,us.name
 					,gl.content
 					,gl.user_no
+					,gl.savename
 			from gallery gl, users us
 			where gl.user_no = us.no
 		]]>
