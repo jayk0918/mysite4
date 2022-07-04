@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -8,6 +9,7 @@
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
+
 
 </head>
 
@@ -22,6 +24,7 @@
 		<!-- nav -->
 		<c:import url="/WEB-INF/views/includes/nav.jsp"></c:import>
 		<!-- //nav -->
+
 
 		<div id="container" class="clearfix">
 			<div id="aside">
@@ -41,7 +44,7 @@
 						<ul>
 							<li>홈</li>
 							<li>게시판</li>
-							<li class="last">일반게시판</li>
+							<li class="last">댓글게시판</li>
 						</ul>
 					</div>
 					<div class="clear"></div>
@@ -50,18 +53,13 @@
 	
 				<div id="board">
 					<div id="list">
-						<form action="${pageContext.request.contextPath}/board/search2" method="get">
+						<form action="" method="">
 							<div class="form-group text-right">
-								<select name = 'content'>
-									<option value=''>선택하세요</option>
-									<option value='title'>제목</option>
-									<option value='name'>글쓴이</option>
-								</select>
-								<input type="text" name = "keyword">
+								<input type="text">
 								<button type="submit" id=btn_search>검색</button>
 							</div>
 						</form>
-						<table>
+						<table >
 							<thead>
 								<tr>
 									<th>번호</th>
@@ -73,21 +71,18 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${bList}" var="BoardVo">
+								<c:forEach items = "${rList}" var = "RBoardVo">
 									<tr>
-										<td>${BoardVo.no}</td>
-										<td class="text-left"><a href="${pageContext.request.contextPath}/board/read?no=${BoardVo.no}">${BoardVo.title}</a></td>
-										<td>${BoardVo.name}</td>
-										<td>${BoardVo.hit}</td>
-										<td>${BoardVo.date}</td>
-										<c:choose>
-											<c:when test="${BoardVo.userNo == authUser.no}">
-												<td><a href="${pageContext.request.contextPath}/delete/no=${BoardVo.no}">[삭제]</a></td>
-											</c:when>
-										</c:choose>
+										<td>${RBoardVo.no}</td>
+										<td class="text-left"><a href="${pageContext.request.contextPath}/rboard/read?no=${RBoardVo.no}">${RBoardVo.title}</a></td>
+										<td>${RBoardVo.userName}</td>
+										<td>${RBoardVo.hit}</td>
+										<td>${RBoardVo.date}</td>
+										<c:if test = "${RBoardVo.userNo == authUser.no}">
+											<td><a href="">[삭제]</a></td>
+										</c:if>
 									</tr>
-								</c:forEach>		
-								
+								</c:forEach>
 							</tbody>
 						</table>
 			
@@ -110,11 +105,10 @@
 							
 							<div class="clear"></div>
 						</div>
-						<c:choose>
-							<c:when test = "${authUser.no != null}">
-								<a id="btn_write" href="${pageContext.request.contextPath}/board/writeForm?no=${authUser.no}">글쓰기</a>
-							</c:when>
-						</c:choose>
+						
+						<c:if test = "${authUser.no != null}">
+							<a id="btn_write" href="${pageContext.request.contextPath}/rboard/writeForm?no=${boardVo.no}">글쓰기</a>
+						</c:if>
 					</div>
 					<!-- //list -->
 				</div>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="rboard">
+	
+	<resultMap id="resultMapRBoardVo" type="com.javaex.vo.RBoardVo">
+		<result column="no" property="no" />
+		<result column="user_no" property="userNo" />
+		<result column="name" property="userName" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="hit" property="hit" />
+		<result column="reg_date" property="date" />
+		<result column="group_no" property="groupNo" />
+		<result column="order_no" property="orderNo" />
+		<result column="depth" property="depth" />
+	</resultMap>
+	
+	<select id = "getList" resultMap = "resultMapRBoardVo">
+		<![CDATA[
+			select 	rb.no
+					,rb.user_no
+					,us.name
+					,rb.title
+					,rb.hit
+					,to_char(rb.reg_date, 'yyyy-mm-dd') as reg_date
+					,rb.group_no
+					,rb.order_no
+					,rb.depth
+			from rboard rb, users us
+			where rb.user_no = us.no
+		]]>
+	</select>
+	
+	
+	<select id = "getContent" resultMap = "resultMapRBoardVo">
+		<![CDATA[
+			select 	rb.no
+					,rb.user_no
+					,us.name
+					,rb.title
+					,rb.content
+					,rb.hit
+					,rb.group_no
+					,rb.order_no
+					,rb.depth
+					,to_char(rb.reg_date, 'yyyy-mm-dd') as reg_date
+			from rboard rb, users us
+			where rb.user_no = us.no
+			and rb.no = #{no}
+		]]>
+	</select>
+	
+	<insert id = "replyInsert" parameterType = "com.javaex.vo.RBoardVo">
+		
+		<![CDATA[
+			insert into rboard
+			values(seq_rboard_no.nextval, #{userNo}, #{title}, #{content}, 0, sysdate, #{groupNo}, #{orderNo}, #{depth})
+		]]>
+	
+	</insert>
+	
+	<update id = "replyDepthUpdate">
+		<![CDATA[
+			update rboard
+			set depth = depth + 1
+			where no = #{no}
+		]]>
+	</update>
+	
+	<update id = "replyOrderNoUpdate">
+		<![CDATA[
+			update rboard
+			set order_no = order_no + 1
+			where no = #{no}
+		]]>
+	</update>
+	
+	<update id = "replyGroupNoUpdate">
+		<![CDATA[
+			update rboard
+			set group_no = group_no + 1
+			where no = #{no}
+		]]>
+	</update>
+	
+	<update id = "hit">
+		<![CDATA[
+			update rboard
+			set hit = hit + 1
+			where no = #{no}
+		]]>
+	</update>
+	
+	
+	
+	
+</mapper>
