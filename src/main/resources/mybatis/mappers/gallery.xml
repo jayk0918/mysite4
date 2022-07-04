@@ -23,9 +23,26 @@
 					,gl.savename
 			from gallery gl, users us
 			where gl.user_no = us.no
+			order by gl.no desc
 		]]>
 	
 	</select>
+	
+	<select id = "getListOne" resultMap = "resultMapGallery">
+		<![CDATA[
+			select	gl.no
+					,us.name
+					,gl.content
+					,gl.user_no
+					,gl.savename
+			from gallery gl, users us
+			where gl.user_no = us.no
+			and gl.no = #{no}
+		]]>
+	
+	</select>
+	
+	
 	
 	<insert id = "insertImg" parameterType = "com.javaex.vo.GalleryVo">
 		<![CDATA[

@@ -62,7 +62,7 @@
 						<c:forEach items="${gList}" var="GalleryVo">
 							<li>
 								<div class="view" >
-									<img class="imgItem" src="${pageContext.request.contextPath}/upload/${GalleryVo.saveName}">
+									<img class="imgItem" src="${pageContext.request.contextPath}/upload/${GalleryVo.saveName}" data-no = "${GalleryVo.no}" data-userno = "${GalleryVo.userNo}">
 									<div class="imgWriter">작성자: <strong>${GalleryVo.userName}</strong></div>
 								</div>
 							</li>
@@ -140,11 +140,11 @@
 					</div>
 					
 				</div>
-				
-				<form method="" action="">
+				<form action = "" method = "post">
 					<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
+						<input type = "text" id = "viewModelNo" name = "viewModelNo" value = "">
 					</div>
 				</form>
 				
@@ -161,10 +161,43 @@ $("#btnImgUpload").on("click", function(){
 	$("#addModal").modal("show");
 });
 
-$("#imgItem").on("click", function(){
+$(".imgItem").on("click", function(){
+	
+	var $this = $(this);
+	var no = $this.data("no");
+	var userNo = $this.data("userno");
+	var authNo = parseInt(${authUser.no});
+	var galleryVo ={
+		no: no,
+		userNo: userNo
+	}
+	
+	console.log(no);
+	console.log(userNo);
+	console.log(authNo);
+	
+	$.ajax({
+		url : "${pageContext.request.contextPath}/api/gallery/getListOne",
+		type : "post",
+		data : galleryVo,
+		dataType : "json",
+		success : function(){
+			
+		},
+		error : function(XHR, status, error) {
+			console.log(status + ' : ' + error);
+		}
+	});
+	
+	
+	
 	$("#viewModal").modal("show");
 });
 
+
+$("#btnDel").on("click", function(){
+	console.log("delete");
+})
 
 
 </script>

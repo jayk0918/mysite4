@@ -21,8 +21,13 @@ public class GalleryDao {
 		return gList;
 	}
 	
-	public int imgInsert(GalleryVo galleryVo) {
+	public GalleryVo getListOne(int no) {
+		GalleryVo galleryVo = sqlSession.selectOne("gallery.getListOne", no);
 		
+		return galleryVo;
+	}
+	
+	public int imgInsert(GalleryVo galleryVo) {
 		int count = sqlSession.insert("gallery.insertImg", galleryVo);
 		System.out.println(count + "건 저장되었습니다.");
 		return count;

@@ -26,6 +26,12 @@ public class GalleryService {
 		return gList;
 	}
 	
+	
+	public GalleryVo getListOne(int no) {
+		return galleryDao.getListOne(no);
+	}
+	
+	
 	public String save(int userNo, String content, MultipartFile file) {
 		
 		String saveDir = "/Users/jaykim0918/javaStudy/upload/";
