@@ -30,7 +30,7 @@ public class RBoardDao {
 	}
 	
 	public void replyInsert(RBoardVo rBoardVo) {
-		sqlSession.update("rboard.replyInsert", rBoardVo);
+		sqlSession.insert("rboard.replyInsert", rBoardVo);
 	}
 	
 	public void replyGroupNoUpdate(int no) {

@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +22,10 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@RequestMapping(value = "list", method = {RequestMethod.GET, RequestMethod.POST})
-	public String list(Model model) {
-		List<BoardVo> bList = boardService.getList();
-		model.addAttribute("bList", bList);
+	public String list(Model model,
+					  @RequestParam(value = "crtPage", required = false, defaultValue = "1") int crtPage) {
+		Map<String, Object> bMap = boardService.getList4(crtPage);
+		model.addAttribute("bMap", bMap);
 		return "/board/list";
 	}
 	
@@ -60,6 +62,12 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
+	@RequestMapping(value = "write4", method = {RequestMethod.GET, RequestMethod.POST})
+	public String write4(@ModelAttribute BoardVo boardVo) {
+		boardService.insertContent4(boardVo);
+		return "redirect:/board/list4";
+	}
+	
 	@RequestMapping(value = "search", method = {RequestMethod.GET, RequestMethod.POST})
 	public String search(Model model, @RequestParam("keyword") String keyword) {
 		System.out.println("BoardController > search()");
@@ -74,7 +82,6 @@ public class BoardController {
 	public String search2(Model model, @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
 		System.out.println("BoardController > search2()");
 		System.out.println("keyword= " + keyword);
-		
 		
 		List<BoardVo> searchList = boardService.searchList2(keyword);
 		model.addAttribute("bList", searchList);

@@ -28,6 +28,47 @@
 		]]>
 	</select>
 	
+	<select id="getList4" parameterType = "map" resultMap = "resultMapBoardVo">
+		<![CDATA[
+			select  rowtable.rn
+        			,rowtable.no
+        			,rowtable.title
+        			,rowtable.name
+        			,rowtable.hit
+        			,rowtable.reg_date
+        			,rowtable.user_no
+			from (select rownum as rn
+            			,list.no
+           				,list.title
+            			,list.name
+            			,list.hit
+            			,list.reg_date
+            			,list.user_no
+      				from (select  br.no
+                   				 ,br.title
+                     			 ,us.name
+                    			 ,br.hit
+                   				 ,to_char(br.reg_date, 'yyyy-mm-dd') as reg_date
+                    			 ,br.user_no as user_no
+				          from board br, users us
+				          where br.user_no = us.no
+				          order by br.no desc) list
+				          ) rowtable
+			where rn >= #{startRownum}
+			and rn <= #{endRownum}
+		]]>
+	</select>
+	
+	<select id = "selectTotalCnt" resultType = "int">
+		<![CDATA[
+			select count(*) as count
+			from board bo, users us
+			where bo.user_no = us.no
+		]]>
+	</select>
+	
+	
+	
 	<select id="searchList" parameterType = "String" resultMap = "resultMapBoardVo">
 		<![CDATA[
 			select  br.no
@@ -98,6 +139,13 @@
 		]]>
 	</insert>
 	
+	<insert id = "insertContent4" parameterType = "com.javaex.vo.BoardVo">
+		<![CDATA[
+			insert into board
+			values(seq_board_no.nextval, #{title}, #{content}, 0, sysdate, #{no})
+		]]>
+	</insert>
+	
 	<update id = "hit" parameterType = "int">
 		<![CDATA[
 			update board
@@ -105,6 +153,10 @@
 			where no = #{no}
 		]]>
 	</update>
+	
+	
+	
+	
 	
 	
 </mapper>

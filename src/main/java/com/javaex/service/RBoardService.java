@@ -15,7 +15,10 @@ public class RBoardService {
 	RBoardDao rBoardDao;
 	
 	public List<RBoardVo> getList(){
-		return rBoardDao.getList();
+		List<RBoardVo> rList = rBoardDao.getList();
+		
+		
+		return rList;
 	}
 	
 	public RBoardVo getContent(int no) {
@@ -24,12 +27,9 @@ public class RBoardService {
 	}
 	
 	public void replyInsert(RBoardVo rBoardVo) {
-		
+		int depth = (rBoardVo.getDepth()) + 1;
+		rBoardVo.setDepth(depth);
 		rBoardDao.replyInsert(rBoardVo);
-		
-		int no = rBoardVo.getNo();
-		rBoardDao.replyOrderNoUpdate(no);
-		rBoardDao.replyDepthUpdate(no);
 		
 	}
 	

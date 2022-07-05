@@ -73,7 +73,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${bMap.boardList}" var="BoardVo">
+								<c:forEach items="${bList}" var="BoardVo">
 									<tr>
 										<td>${BoardVo.no}</td>
 										<td class="text-left"><a href="${pageContext.request.contextPath}/board/read?no=${BoardVo.no}">${BoardVo.title}</a></td>
@@ -93,24 +93,18 @@
 			
 						<div id="paging">
 							<ul>
-								<c:if test = "${bMap.previous}">
-									<li><a href="${pageContext.request.contextPath}/board/list?crtPage=${bMap.startPageBtnNo - 1}">◀</a></li>
-								</c:if>
-								
-									<c:forEach begin = "${bMap.startPageBtnNo}" end = "${bMap.endPageBtnNo}" step = "1" var = "page" >
-										<c:choose>
-											<c:when test = "${param.crtPage == page}">
-												<li class = "active"><a href = "${pageContext.request.contextPath}/board/list?crtPage=${page}">${page}</a></li>
-											</c:when>
-											<c:otherwise>
-												<li><a href = "${pageContext.request.contextPath}/board/list?crtPage=${page}">${page}</a></li>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-									
-								<c:if test = "${bMap.next}">
-									<li><a href="${pageContext.request.contextPath}/board/list?crtPage=${bMap.endPageBtnNo + 1}">▶</a></li>
-								</c:if>
+								<li><a href="">◀</a></li>
+								<li><a href="">1</a></li>
+								<li><a href="">2</a></li>
+								<li><a href="">3</a></li>
+								<li><a href="">4</a></li>
+								<li class="active"><a href="">5</a></li>
+								<li><a href="">6</a></li>
+								<li><a href="">7</a></li>
+								<li><a href="">8</a></li>
+								<li><a href="">9</a></li>
+								<li><a href="">10</a></li>
+								<li><a href="">▶</a></li>
 							</ul>
 							
 							
