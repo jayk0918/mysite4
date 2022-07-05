@@ -97,14 +97,30 @@
 									<li><a href="${pageContext.request.contextPath}/board/list?crtPage=${bMap.startPageBtnNo - 1}">◀</a></li>
 								</c:if>
 								
-									<c:forEach begin = "${bMap.startPageBtnNo}" end = "${bMap.endPageBtnNo}" step = "1" var = "page" >
+									<c:forEach begin = "${bMap.startPageBtnNo}" end = "${bMap.endPageBtnNo}" step = "1" var = "page">
 										<c:choose>
-											<c:when test = "${param.crtPage == page}">
-												<li class = "active"><a href = "${pageContext.request.contextPath}/board/list?crtPage=${page}">${page}</a></li>
+											<c:when test = "${param.crtPage == null}">
+												<c:if test = "${page == 1}">
+													<li class = "active"><a href = "${pageContext.request.contextPath}/board/list?crtPage=${page}">${page}</a></li>
+												</c:if>
+												<c:if test = "${page != 1}">
+													<li><a href = "${pageContext.request.contextPath}/board/list?crtPage=${page}">${page}</a></li>
+												</c:if>
 											</c:when>
+											
 											<c:otherwise>
-												<li><a href = "${pageContext.request.contextPath}/board/list?crtPage=${page}">${page}</a></li>
+												<c:choose>
+													<c:when test = "${param.crtPage == page}">
+														<li class = "active"><a href = "${pageContext.request.contextPath}/board/list?crtPage=${page}">${page}</a></li>
+													</c:when>
+													
+													<c:otherwise>
+														<li><a href = "${pageContext.request.contextPath}/board/list?crtPage=${page}">${page}</a></li>
+													</c:otherwise>
+													
+												</c:choose>
 											</c:otherwise>
+											
 										</c:choose>
 									</c:forEach>
 									
